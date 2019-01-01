@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { CanNavigateToAdminGuard } from './can-navigate-to-admin.guard';
+import { BookListComponent } from './book-list/book-list.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { CreateBookComponent } from './create-book/create-book.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 const routes: Routes = [
   {
@@ -16,18 +19,29 @@ const routes: Routes = [
   },
   {
     path: 'books',
-    loadChildren: './books/books.module#BooksModule'
+    component: BookListComponent
+  },
+  {
+    path: 'books/:isbn',
+    component: BookDetailsComponent
   },
   {
     path: 'admin',
-    loadChildren: './admin/admin.module#AdminModule',
-    canActivate: [CanNavigateToAdminGuard]
+    redirectTo: 'admin/create',
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin/create',
+    component: CreateBookComponent
+  },
+  {
+    path: 'admin/edit/:isbn',
+    component: EditBookComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [CanNavigateToAdminGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

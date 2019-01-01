@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/form
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { BookStoreService } from '../../shared/book-store.service';
+import { BookStoreService } from './book-store.service';
 
 @Injectable({
   providedIn: 'root'
